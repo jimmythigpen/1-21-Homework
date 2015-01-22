@@ -9,7 +9,7 @@ etsyItems.map(function(item) {
 
 var avg = Math.round((total / etsyItems.length) * 100) / 100;
 
-console.log("The average price is $" + avg);
+console.assert("The average price is $" + avg);
 
 // QUESTION TWO
 // Show me how to get an array of items that cost between $14.00 and $18.00 USD
@@ -32,10 +32,26 @@ console.log("The average price is $" + avg);
 // ]
 
 
+var filteredItems = etsyItems.filter(function(item) {
+  return item.price > 14 && item.price < 18;
+
+});
+
+console.assert("Items that cost between $14.00 and $18.00:", filteredItems);
+
+
 // QUESTION THREE
 // Show me how find the item with a "GBP" curreny code and print its name and price. Please console.log the one you find.
 // The output should be "1970s Schlitz Malt Liquor Glass Beer Pitcher costs £18"
+//
 
+var filteredItems = etsyItems.filter(function(item) {
+  return item.currency_code == "GBP";
+});
+
+var result = filteredItems[0];
+
+console.assert(result.title, "costs £", result.price);
 
 // QUESTION FOUR
 // Show me how to find which items are made of wood. Please console.log the ones you find.
@@ -47,6 +63,11 @@ console.log("The average price is $" + avg);
 // Magnetic Wall Mount Bottle Opener Barware Set - Stainless Steel or Black - Personalized if you like! is made of wood.
 // Engraved Pocket Knife, Personalized Groomsmen Gift, Ring Bearer Gift, Graduation Gift, 4 Knives is made of wood.
 
+etsyItems.filter(function(item) {
+  if (item.materials.indexOf("wood") != -1) {
+    console.assert(item.title, "is made of wood")
+  }
+});
 
 // QUESTION FIVE
 // Show me how to find which items are made of eight or more materials. Please console.log the ones you find.
@@ -79,7 +100,18 @@ console.log("The average price is $" + avg);
 // the three broomsticks glass
 // personalized harry potter glass
 
+etsyItems.filter(function(item) {
+  if (item.materials.length >= 8) {
+    console.log(item.title, item.materials);
+  }
+});
 
 // QUESTION 6
 // Show me how to calculate how many items were made by their sellers
 // The output should be "18 were made by their sellers"
+
+var filteredItems = etsyItems.filter(function(item) {
+  return (item.who_made == "i_did")
+});
+
+console.assert(filteredItems.length + " were made by their sellers");
